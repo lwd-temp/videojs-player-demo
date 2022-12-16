@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video.js Player Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/simpledotcss/simple.min.css">
+    <link href="https://unpkg.com/video.js@7.11.4/dist/video-js.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h4>Video.js Player Demo</h4>
+    <p class="source">Src: </p>
+    <div class="loadcontrol">
+        <input type="text" id="source" value="Monika_never_gonna_give_you_up.mp4" />
+        <button id="load">Load</button>
+    </div>
+    <div class="container"></div>
+    <script>
+        // Get arg from url and play it
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('url');
+        // if videoUrl not null, hide loadcontrol
+        if (videoUrl != null) {
+            document.querySelector('.loadcontrol').style = "display: none;"
+        }
+        document.querySelector('.source').innerHTML = 'Src: ' + videoUrl;
+        const video = document.createElement('video');
+        video.setAttribute('id', 'my-video');
+        video.setAttribute('class', 'video-js vjs-fluid');
+        video.setAttribute('controls', '');
+        video.setAttribute('preload', 'auto');
+        video.setAttribute('data-setup', '{}');
+        const source = document.createElement('source');
+        source.setAttribute('src', videoUrl);
+        source.setAttribute('type', 'video/mp4');
+        video.appendChild(source);
+        document.querySelector('.container').appendChild(video);
+    </script>
+    <script>
+        // load button
+        const load = document.getElementById('load');
+        load.addEventListener('click', () => {
+            const videoUrl = document.getElementById('source').value;
+            // append url to arg and reload this page
+            window.location.href = window
+                .location
+                .href
+                .split('?')[0] + '?url=' + videoUrl;
+        });
+    </script>
+    <script src="https://unpkg.com/video.js@7.11.4/dist/video.min.js"></script>
+</body>
+
+</html>
