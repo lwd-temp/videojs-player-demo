@@ -47,7 +47,7 @@
             window.location.href = window
                 .location
                 .href
-                .split('?')[0] + '?url=' + videoUrl;
+                .split('?')[0] + '?url=' + encodeURIComponent(videoUrl);
         });
     </script>
     <script src="https://unpkg.com/video.js@7.11.4/dist/video.min.js"></script>
